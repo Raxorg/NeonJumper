@@ -2,6 +2,8 @@ package com.epicness.neonjumper.game.stuff;
 
 import static com.badlogic.gdx.graphics.Color.CLEAR;
 import static com.badlogic.gdx.graphics.Color.WHITE;
+import static com.epicness.neonjumper.game.constants.GameConstants.PLAYER_GLOW_SIZE;
+import static com.epicness.neonjumper.game.constants.GameConstants.PLAYER_RADIUS;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,7 +21,9 @@ public class Player implements Movable {
 
     public Player(Sprite glowSprite) {
         glow = new Sprited(glowSprite);
-        circle = new CirclePlus(glow.getWidth() / 5f, WHITE, CLEAR, 7f);
+        glow.setSize(PLAYER_GLOW_SIZE);
+
+        circle = new CirclePlus(PLAYER_RADIUS, WHITE, CLEAR, 7f);
         circle.setCenterBasedPosition(glow.getCenter());
         speed = new Vector2();
     }
@@ -41,7 +45,7 @@ public class Player implements Movable {
     @Override
     public void translateX(float amount) {
         glow.translateX(amount);
-        circle.translateY(amount);
+        circle.translateX(amount);
     }
 
     @Override

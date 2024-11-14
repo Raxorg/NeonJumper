@@ -12,5 +12,6 @@ public class PlayerMovementHandler extends GameLogicHandler {
     protected void update(float delta) {
         get(GravityHandler.class).applyGravity(delta);
         get(VelocityMovementHandler.class).movePlayer(delta);
+        get(BottomChecker.class).checkBottom();
     }
 }
