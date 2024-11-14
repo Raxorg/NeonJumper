@@ -15,8 +15,7 @@ public class VelocityMovementHandler extends GameLogicHandler {
         aux = new Vector2();
     }
 
-    @Override
-    protected void update(float delta) {
-        player.translate(aux.set(player.speed).scl(delta * 500f));
+    public void movePlayer(float delta) {
+        player.translate(aux.set(player.speed).scl(delta));
     }
 }
