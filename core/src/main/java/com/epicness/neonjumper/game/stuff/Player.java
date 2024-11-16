@@ -23,7 +23,7 @@ public class Player implements Movable {
         glow = new Sprited(glowSprite);
         glow.setSize(PLAYER_GLOW_SIZE);
 
-        circle = new CirclePlus(PLAYER_RADIUS, WHITE, CLEAR, 7f);
+        circle = new CirclePlus(PLAYER_RADIUS, WHITE, CLEAR, 5f);
         circle.setCenterBasedPosition(glow.getCenter());
         speed = new Vector2();
     }

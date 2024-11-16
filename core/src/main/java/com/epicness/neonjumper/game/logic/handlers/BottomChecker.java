@@ -1,6 +1,6 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
-import static com.epicness.neonjumper.game.constants.GameConstants.PLAYER_RADIUS;
+import static com.epicness.neonjumper.game.constants.GameConstants.PLAYER_GLOW_SIZE;
 
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
 import com.epicness.neonjumper.game.stuff.Player;
@@ -15,7 +15,7 @@ public class BottomChecker extends GameLogicHandler {
     }
 
     public void checkBottom() {
-        if (player.getY() <= -PLAYER_RADIUS * 2f) {
+        if (player.getY() < -PLAYER_GLOW_SIZE) {
             player.speed.setZero();
             get(PlayerSpawner.class).spawnPlayer();
         }

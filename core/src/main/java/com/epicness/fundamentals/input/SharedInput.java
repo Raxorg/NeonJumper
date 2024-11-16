@@ -5,9 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epicness.fundamentals.SharedScreen;
-import com.epicness.fundamentals.renderer.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,6 @@ public class SharedInput implements InputProcessor {
 
     // Structure
     private OrthographicCamera staticCamera, dynamicCamera;
-    private Renderer<?> renderer;
     // Input related
     private final List<LogicInputHandler<?, ?, ?, ?, ?>> inputHandlers;
     private boolean enabled, inputConsumed;
@@ -182,9 +179,7 @@ public class SharedInput implements InputProcessor {
     }
 
     private void unproject(Camera camera, int screenX, int screenY) {
-        unprojected.set(screenX, screenY, 0f);
-        Viewport viewport = renderer.getViewport();
-        camera.unproject(unprojected, viewport.getScreenX(), viewport.getScreenY(), viewport.getScreenWidth(), viewport.getScreenHeight());
+        camera.unproject(unprojected.set(screenX, screenY, 0f));
     }
 
     public void setEnabled(boolean enabled) {
@@ -208,12 +203,8 @@ public class SharedInput implements InputProcessor {
     }
 
     // Structure
-    public void setRenderer(Renderer<?> renderer) {
-        this.renderer = renderer;
-    }
-
     public void setScreen(SharedScreen screen) {
-        staticCamera = screen.staticCamera;
-        dynamicCamera = screen.dynamicCamera;
+        staticCamera = screen.getStaticCamera();
+        dynamicCamera = screen.getDynamicCamera();
     }
 }

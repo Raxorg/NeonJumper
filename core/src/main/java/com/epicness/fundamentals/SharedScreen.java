@@ -1,8 +1,6 @@
 package com.epicness.fundamentals;
 
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_HEIGHT;
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_WIDTH;
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.epicness.fundamentals.logic.Logic;
@@ -14,13 +12,17 @@ public class SharedScreen extends ScreenAdapter {
     private Logic logic;
     private Renderer<?> renderer;
     // Screen related
-    public final OrthographicCamera dynamicCamera, staticCamera;
+    private final OrthographicCamera dynamicCamera, staticCamera;
+
+    private SharedScreen(int cameraWidth, int cameraHeight) {
+        dynamicCamera = new OrthographicCamera();
+        dynamicCamera.setToOrtho(false, cameraWidth, cameraHeight);
+        staticCamera = new OrthographicCamera();
+        staticCamera.setToOrtho(false, cameraWidth, cameraHeight);
+    }
 
     public SharedScreen() {
-        dynamicCamera = new OrthographicCamera();
-        dynamicCamera.setToOrtho(false, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        this(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -31,13 +33,22 @@ public class SharedScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        renderer.resize(width, height);
+        // TODO: 11/15/2024 let the cameras know about this
+        // Initial idea is to change the zoom and probably move the camera when user resizes the window
         logic.resize(width, height);
     }
 
     @Override
     public void pause() {
         logic.pause();
+    }
+
+    public OrthographicCamera getDynamicCamera() {
+        return dynamicCamera;
+    }
+
+    public OrthographicCamera getStaticCamera() {
+        return staticCamera;
     }
 
     // Structure

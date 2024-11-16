@@ -1,8 +1,7 @@
 package com.epicness.neonjumper.game;
 
 import static com.badlogic.gdx.graphics.Color.BLACK;
-import static com.epicness.neonjumper.game.constants.GameConstants.MIN_VIEWPORT_HEIGHT;
-import static com.epicness.neonjumper.game.constants.GameConstants.MIN_VIEWPORT_WIDTH;
+import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
 import static com.epicness.neonjumper.game.logic.handlers.DebugHandler.debug;
 
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -11,17 +10,14 @@ import com.epicness.neonjumper.game.stuff.GameStuff;
 
 public class GameRenderer extends Renderer<GameStuff> {
 
-    public GameRenderer() {
-        viewport.setMinWorldHeight(MIN_VIEWPORT_HEIGHT);
-        viewport.setMinWorldWidth(MIN_VIEWPORT_WIDTH);
-    }
-
     @Override
     public void render() {
         ScreenUtils.clear(BLACK);
 
+        useDynamicCamera();
         spriteBatch.begin();
         stuff.getPlayer().draw(shapeDrawer, spriteBatch);
+        loopArray(stuff.getObstacles(), obstacle -> obstacle.draw(shapeDrawer));
         spriteBatch.end();
 
         if (debug) {

@@ -41,7 +41,6 @@ public abstract class Initializer<A extends Assets, L extends Logic, R extends R
             renderer,
             stuff
         );
-        input.setRenderer(renderer);
         renderer.setScreen(screen);
         renderer.setSharedStuff(sharedResources.getStuff());
         renderer.setStuff(stuff);
@@ -67,7 +66,6 @@ public abstract class Initializer<A extends Assets, L extends Logic, R extends R
         SharedInput input = sharedResources.getInput();
         SharedScreen screen = sharedResources.getScreen();
 
-        input.setRenderer(renderer);
         screen.setLogic(logic);
         screen.setRenderer(renderer);
 

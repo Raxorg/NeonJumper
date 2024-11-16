@@ -3,9 +3,8 @@ package com.epicness.fundamentals.stuff;
 import static com.badlogic.gdx.graphics.Color.BLACK;
 import static com.badlogic.gdx.graphics.Color.NAVY;
 import static com.epicness.fundamentals.constants.ColorConstants.BLACK_50;
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_HEIGHT;
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_WIDTH;
 
+import com.badlogic.gdx.Gdx;
 import com.epicness.fundamentals.SharedScreen;
 import com.epicness.fundamentals.assets.SharedAssets;
 
@@ -16,17 +15,17 @@ public class SharedStuff extends Stuff<SharedAssets> {
     private SharedScreen screen;
     // Stuff
     private AnimatedBackgroundDeluxe animatedBackground;
-    private Sprited fader;
+    private Sprited fader; // TODO: 11/15/2024 Fader handles window resizes
 
     @Override
     public void initializeStuff() {
         animatedBackground = new AnimatedBackgroundDeluxe(
             0, 0,
-            VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
+            Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
             NAVY.cpy(),
             assets.getWeirdShape(),
             assets.getPixel(),
-            screen.staticCamera,
+            screen.getStaticCamera(),
             24,
             12,
             20f
@@ -35,7 +34,7 @@ public class SharedStuff extends Stuff<SharedAssets> {
         animatedBackground.setSpriteColor(BLACK_50.cpy());
 
         fader = new Sprited(assets.getPixel());
-        fader.setSize(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        fader.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         fader.setColor(BLACK.cpy());
     }
 

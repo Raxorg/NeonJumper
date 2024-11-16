@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.epicness.fundamentals.logic.CompletionListener;
 import com.epicness.fundamentals.stuff.SharedStuff;
 
+// TODO: 11/15/2024 Handle window resizes
 public class Fader {
 
     // Structure

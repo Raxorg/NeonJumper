@@ -1,14 +1,11 @@
 package com.epicness.fundamentals.renderer;
 
 import static com.epicness.fundamentals.assets.SharedAssetPaths.SPRITESNEAREST_ATLAS;
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_HEIGHT;
-import static com.epicness.fundamentals.constants.SharedConstants.VIEWPORT_WIDTH;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.epicness.fundamentals.SharedScreen;
 import com.epicness.fundamentals.stuff.SharedStuff;
 import com.epicness.fundamentals.stuff.Stuff;
@@ -21,13 +18,11 @@ public abstract class Renderer<S extends Stuff<?>> {
     protected SharedStuff sharedStuff;
     protected S stuff;
     // Rendering related
-    protected final ExtendViewport viewport;
     protected final SpriteBatch spriteBatch;
     protected final ShapeRendererPlus shapeRenderer;
     protected final ShapeDrawerPlus shapeDrawer;
 
     public Renderer() {
-        viewport = new ExtendViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRendererPlus();
         shapeRenderer.setAutoShapeType(true);
@@ -36,25 +31,18 @@ public abstract class Renderer<S extends Stuff<?>> {
 
     public abstract void render();
 
-    public void resize(int width, int height) {
-        viewport.update(width, height);
-        spriteBatch.setProjectionMatrix(viewport.getCamera().combined);
-        shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
-    }
-
     public void useCamera(Camera camera) {
-        viewport.setCamera(camera);
-        viewport.apply();
+        camera.update();
         spriteBatch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(camera.combined);
     }
 
     public void useStaticCamera() {
-        useCamera(screen.staticCamera);
+        useCamera(screen.getStaticCamera());
     }
 
     public void useDynamicCamera() {
-        useCamera(screen.dynamicCamera);
+        useCamera(screen.getDynamicCamera());
     }
 
     public SpriteBatch getSpriteBatch() {
@@ -73,10 +61,6 @@ public abstract class Renderer<S extends Stuff<?>> {
         for (int i = 0; i < array.size; i++) {
             array.get(i).draw(spriteBatch, shapeDrawer);
         }
-    }
-
-    public ExtendViewport getViewport() {
-        return viewport;
     }
 
     // Structure

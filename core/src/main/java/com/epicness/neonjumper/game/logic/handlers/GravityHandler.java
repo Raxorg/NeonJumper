@@ -13,6 +13,6 @@ public class GravityHandler extends GameLogicHandler {
     }
 
     public void applyGravity(float delta) {
-        player.speed.y -= 1000f * delta;
+        player.speed.y -= 2000f * delta;
     }
 }

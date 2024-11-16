@@ -7,12 +7,15 @@ import com.epicness.neonjumper.game.logic.handlers.DebugHandler;
 import com.epicness.neonjumper.game.logic.handlers.GravityHandler;
 import com.epicness.neonjumper.game.logic.handlers.JumpHandler;
 import com.epicness.neonjumper.game.logic.handlers.ObstacleGenerator;
+import com.epicness.neonjumper.game.logic.handlers.ObstacleMover;
 import com.epicness.neonjumper.game.logic.handlers.PlayerMovementHandler;
 import com.epicness.neonjumper.game.logic.handlers.PlayerSpawner;
 import com.epicness.neonjumper.game.logic.handlers.VelocityMovementHandler;
 
 public class GameLogic extends Logic {
 
+    private final ObstacleGenerator obstacleGenerator;
+    private final ObstacleMover obstacleMover;
     private final PlayerMovementHandler playerMovementHandler;
 
     public GameLogic() {
@@ -21,7 +24,8 @@ public class GameLogic extends Logic {
         registerHandler(new DebugHandler());
         registerHandler(new GravityHandler());
         registerHandler(new JumpHandler());
-        registerHandler(new ObstacleGenerator());
+        registerHandler(obstacleGenerator = new ObstacleGenerator());
+        registerHandler(obstacleMover = new ObstacleMover());
         registerHandler(playerMovementHandler = new PlayerMovementHandler());
         registerHandler(new PlayerSpawner());
         registerHandler(new VelocityMovementHandler());
@@ -29,6 +33,8 @@ public class GameLogic extends Logic {
 
     @Override
     public void update() {
+        obstacleGenerator.update();
+        obstacleMover.update();
         playerMovementHandler.update();
     }
 

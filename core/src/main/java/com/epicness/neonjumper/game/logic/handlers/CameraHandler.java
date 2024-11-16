@@ -1,17 +1,37 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
-import static com.epicness.neonjumper.game.constants.GameConstants.MIN_VIEWPORT_WIDTH;
-
+import com.badlogic.gdx.graphics.Camera;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
+import com.epicness.neonjumper.game.stuff.Player;
 
 public class CameraHandler extends GameLogicHandler {
 
-    public static float GAME_WIDTH, GAME_HEIGHT;
+    private Player player;
+    private Camera camera;
+    private static float gameWidth, gameHeight;
 
     @Override
     protected void init() {
-        screen.staticCamera.position.x = MIN_VIEWPORT_WIDTH / 2f;
-        GAME_WIDTH = screen.staticCamera.viewportWidth;
-        GAME_HEIGHT = screen.staticCamera.viewportHeight;
+        player = stuff.getPlayer();
+
+        camera = screen.getDynamicCamera();
+
+        gameWidth = camera.viewportWidth;
+        gameHeight = camera.viewportHeight;
+    }
+
+    public void followPlayer() {
+        float diff = camera.position.y - 150f - player.getY();
+        if (diff < 0f) {
+            camera.position.y -= diff;
+        }
+    }
+
+    public static float gameWidth() {
+        return gameWidth;
+    }
+
+    public static float gameHeight() {
+        return gameHeight;
     }
 }
