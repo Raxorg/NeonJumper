@@ -1,7 +1,5 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
-import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
-
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
 import com.epicness.neonjumper.game.stuff.Obstacle;

@@ -1,6 +1,7 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
 import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
+import static com.epicness.neonjumper.game.constants.GameConstants.TRIANGLE_VERTS;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.SnapshotArray;
@@ -14,15 +15,11 @@ public class ObstacleGenerator extends GameLogicHandler {
     @Override
     protected void init() {
         obstacles = stuff.getObstacles();
-        float[] verts = {
-            0f, 0f,
-            100f, 0f,
-            50f, 100f,
-        };
+
         for (int i = 0; i < 20; i++) {
-            Obstacle obstacle = new Obstacle(verts);
-            obstacle.setPosition(MathUtils.random(0f, 300f), MathUtils.random(0f, 700f));
-            obstacles.add(obstacle);
+            Obstacle triangleObstacle = new Obstacle(TRIANGLE_VERTS);
+            triangleObstacle.setPosition(MathUtils.random(0f, 300f), MathUtils.random(0f, 700f));
+            obstacles.add(triangleObstacle);
         }
     }
 
