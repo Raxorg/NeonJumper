@@ -58,4 +58,8 @@ public class Player implements Movable {
         glow.translateY(amount);
         circle.translateY(amount);
     }
+
+    public CirclePlus getCircle() {
+        return circle;
+    }
 }

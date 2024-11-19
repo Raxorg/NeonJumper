@@ -19,9 +19,9 @@ public class ObstacleGenerator extends GameLogicHandler {
             100f, 0f,
             50f, 100f,
         };
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             Obstacle obstacle = new Obstacle(verts);
-            obstacle.setPosition(MathUtils.random(0f,500f), MathUtils.random(0f, 1000f));
+            obstacle.setPosition(MathUtils.random(0f, 300f), MathUtils.random(0f, 700f));
             obstacles.add(obstacle);
         }
     }

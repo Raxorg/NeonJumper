@@ -2,7 +2,7 @@ package com.epicness.neonjumper.game.logic.handlers;
 
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
 
-public class PlayerMovementHandler extends GameLogicHandler {
+public class GameLoopHandler extends GameLogicHandler {
 
     @Override
     protected void init() {
@@ -14,5 +14,7 @@ public class PlayerMovementHandler extends GameLogicHandler {
         get(VelocityMovementHandler.class).movePlayer(delta);
         get(BottomChecker.class).checkBottom();
         get(CameraHandler.class).followPlayer();
+        get(CollisionHandler.class).checkCollisions();
+        get(ObstacleCleaner.class).cleanObstacles();
     }
 }
