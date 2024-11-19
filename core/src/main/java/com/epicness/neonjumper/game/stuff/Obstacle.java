@@ -6,17 +6,18 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 import com.badlogic.gdx.graphics.Color;
 import com.epicness.fundamentals.renderer.ShapeDrawerPlus;
 import com.epicness.fundamentals.stuff.interfaces.HasMovable;
+import com.epicness.fundamentals.stuff.interfaces.HasRotatable;
 import com.epicness.fundamentals.stuff.interfaces.Movable;
+import com.epicness.fundamentals.stuff.interfaces.Rotatable;
 import com.epicness.fundamentals.stuff.shapes.bidimensional.PolygonPlus;
 
-public class Obstacle implements HasMovable {
+public class Obstacle implements HasMovable , HasRotatable {
 
     private final PolygonPlus shape;
     private final float height;
 
     public Obstacle(float[] vertices) {
         shape = new PolygonPlus(vertices, 3f, WHITE, CLEAR);
-
         float maxHeight = 0f;
         for (int i = 1; i < vertices.length; i += 2) {
             maxHeight = Math.max(vertices[i], maxHeight);
@@ -30,6 +31,11 @@ public class Obstacle implements HasMovable {
 
     @Override
     public Movable getMovable() {
+        return shape;
+    }
+
+    @Override
+    public Rotatable getRotatable() {
         return shape;
     }
 
