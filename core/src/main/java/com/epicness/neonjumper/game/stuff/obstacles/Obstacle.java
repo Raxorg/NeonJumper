@@ -4,11 +4,12 @@ import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
 
 import com.epicness.fundamentals.renderer.ShapeDrawerPlus;
 import com.epicness.fundamentals.stuff.interfaces.Movable;
+import com.epicness.fundamentals.stuff.interfaces.Rotatable;
 import com.epicness.fundamentals.stuff.interfaces.ShapeDrawable;
 import com.epicness.neonjumper.game.stuff.pieces.ObstaclePiece;
 import com.epicness.neonjumper.game.stuff.pieces.PieceBuilder;
 
-public class Obstacle implements ShapeDrawable, Movable {
+public class Obstacle implements ShapeDrawable, Movable, Rotatable {
 
     protected final ObstaclePiece[] pieces;
 
@@ -43,6 +44,16 @@ public class Obstacle implements ShapeDrawable, Movable {
     @Override
     public final void translateY(float amount) {
         loopArray(pieces, piece -> piece.translateY(amount));
+    }
+
+    @Override
+    public float getRotation() {
+        return pieces[0].getRotation();
+    }
+
+    @Override
+    public void rotate(float degrees) {
+        loopArray(pieces, piece -> piece.rotate(degrees));
     }
 
     public final float getHeight() {
