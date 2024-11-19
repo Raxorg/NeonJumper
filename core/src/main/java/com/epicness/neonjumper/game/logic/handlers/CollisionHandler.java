@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.epicness.fundamentals.stuff.shapes.bidimensional.CirclePlus;
 import com.epicness.fundamentals.utils.CollisionUtils;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
-import com.epicness.neonjumper.game.stuff.Obstacle;
+import com.epicness.neonjumper.game.stuff.obstacles.Obstacle;
 
 public class CollisionHandler extends GameLogicHandler {
 
@@ -21,10 +21,10 @@ public class CollisionHandler extends GameLogicHandler {
     }
 
     public void checkCollisions() {
-        loopArray(obstacles, obstacle -> {
-            if (CollisionUtils.overlapPolygonCircle(obstacle.getBounds(), playerBounds)) {
-                obstacle.setBorderColor(RED);
+        loopArray(obstacles, obstacle -> loopArray(obstacle.getPieces(), piece -> {
+            if (CollisionUtils.overlapPolygonCircle(piece.getBounds(), playerBounds)) {
+                piece.setBorderColor(RED);
             }
-        });
+        }));
     }
 }

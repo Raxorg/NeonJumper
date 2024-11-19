@@ -6,7 +6,7 @@ import static com.epicness.neonjumper.game.logic.handlers.CameraHandler.gameHeig
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
-import com.epicness.neonjumper.game.stuff.Obstacle;
+import com.epicness.neonjumper.game.stuff.obstacles.Obstacle;
 
 public class ObstacleCleaner extends GameLogicHandler {
 

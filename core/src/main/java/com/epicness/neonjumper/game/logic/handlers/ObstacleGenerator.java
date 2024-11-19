@@ -1,12 +1,14 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
 import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
-import static com.epicness.neonjumper.game.constants.GameConstants.ARC_90_VERTS;
+import static com.epicness.neonjumper.game.logic.handlers.CameraHandler.gameWidth;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
-import com.epicness.neonjumper.game.stuff.Obstacle;
+import com.epicness.neonjumper.game.stuff.obstacles.CircleDoorBuilder;
+import com.epicness.neonjumper.game.stuff.obstacles.Obstacle;
+import com.epicness.neonjumper.game.stuff.pieces.TriangleBuilder;
 
 public class ObstacleGenerator extends GameLogicHandler {
 
@@ -16,9 +18,11 @@ public class ObstacleGenerator extends GameLogicHandler {
     protected void init() {
         obstacles = stuff.getObstacles();
 
-        for (int i = 0; i < 20; i++) {
-            Obstacle obstacle = new Obstacle(ARC_90_VERTS);
-            obstacle.setPosition(MathUtils.random(0f, 300f), MathUtils.random(0f, 700f));
+        CircleDoorBuilder circleDoorBuilder = new CircleDoorBuilder(3, 60f, 100f);
+        TriangleBuilder triangleBuilder = new TriangleBuilder(100f);
+        for (int i = 0; i < 5; i++) {
+            Obstacle obstacle = MathUtils.randomBoolean() ? new Obstacle(circleDoorBuilder) : new Obstacle(triangleBuilder);
+            obstacle.setPosition(gameWidth() / 2f, 500f + i * 400f);
             obstacles.add(obstacle);
         }
     }

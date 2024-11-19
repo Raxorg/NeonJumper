@@ -2,7 +2,7 @@ package com.epicness.neonjumper.game.logic.handlers;
 
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;
-import com.epicness.neonjumper.game.stuff.Obstacle;
+import com.epicness.neonjumper.game.stuff.obstacles.Obstacle;
 
 public class ObstacleMover extends GameLogicHandler {
 

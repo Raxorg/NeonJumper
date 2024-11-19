@@ -1,4 +1,4 @@
-package com.epicness.neonjumper.game.stuff;
+package com.epicness.neonjumper.game.stuff.pieces;
 
 import static com.badlogic.gdx.graphics.Color.CLEAR;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -11,12 +11,13 @@ import com.epicness.fundamentals.stuff.interfaces.Movable;
 import com.epicness.fundamentals.stuff.interfaces.Rotatable;
 import com.epicness.fundamentals.stuff.shapes.bidimensional.PolygonPlus;
 
-public class Obstacle implements HasMovable , HasRotatable {
+public class ObstaclePiece implements HasMovable, HasRotatable {
 
     private final PolygonPlus shape;
     private final float height;
 
-    public Obstacle(float[] vertices) {
+    public ObstaclePiece(PieceBuilder pieceBuilder) {
+        float[] vertices = pieceBuilder.makeVertices();
         shape = new PolygonPlus(vertices, 3f, WHITE, CLEAR);
         float maxHeight = 0f;
         for (int i = 1; i < vertices.length; i += 2) {
@@ -40,7 +41,7 @@ public class Obstacle implements HasMovable , HasRotatable {
     }
 
     public float getHeight() {
-        return height;
+        return height * shape.getScaleY();
     }
 
     public void setBorderColor(Color color) {
