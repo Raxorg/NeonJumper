@@ -6,6 +6,6 @@ public class InitSequenceHandler extends GameLogicHandler {
 
     @Override
     protected void init() {
-        get(ObstacleGenerator.class).spawnObstacles();
+        get(ObstacleGenerator.class).spawnStartingObstacles();
     }
 }

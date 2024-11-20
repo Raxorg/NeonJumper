@@ -25,6 +25,7 @@ public class CollisionHandler extends GameLogicHandler {
                 obstacles.removeValue(obstacle, true);
                 sharedAssets.getShortLaser().play();
                 get(ScoreHandler.class).penalize();
+                get(ObstacleGenerator.class).spawnObstacle(obstacle.getY() + 1200f);
             }
         }));
     }

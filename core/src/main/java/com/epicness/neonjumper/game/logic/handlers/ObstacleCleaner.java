@@ -26,6 +26,7 @@ public class ObstacleCleaner extends GameLogicHandler {
                 obstacles.removeValue(obstacle, true);
                 get(Rotator.class).unregisterObstacle(obstacle);
                 get(HorizontalMover.class).unregisterObstacle(obstacle);
+                get(ObstacleGenerator.class).spawnObstacle(obstacle.getY() + 1200f);
             }
         });
     }
