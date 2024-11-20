@@ -1,7 +1,7 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
+import static com.epicness.fundamentals.SharedScreen.gameHeight;
 import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
-import static com.epicness.neonjumper.game.logic.handlers.CameraHandler.gameHeight;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.utils.SnapshotArray;

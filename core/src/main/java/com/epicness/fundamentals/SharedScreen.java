@@ -13,16 +13,12 @@ public class SharedScreen extends ScreenAdapter {
     private Renderer<?> renderer;
     // Screen related
     private final OrthographicCamera dynamicCamera, staticCamera;
-
-    private SharedScreen(int cameraWidth, int cameraHeight) {
-        dynamicCamera = new OrthographicCamera();
-        dynamicCamera.setToOrtho(false, cameraWidth, cameraHeight);
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, cameraWidth, cameraHeight);
-    }
+    private static float gameWidth, gameHeight;
 
     public SharedScreen() {
-        this(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        dynamicCamera = new OrthographicCamera();
+        staticCamera = new OrthographicCamera();
+        setCameraHeight(1000f);
     }
 
     @Override
@@ -49,6 +45,30 @@ public class SharedScreen extends ScreenAdapter {
 
     public OrthographicCamera getStaticCamera() {
         return staticCamera;
+    }
+
+    public void setCameraWidth(float width) {
+        float ratio = (float) Gdx.graphics.getHeight() / Gdx.graphics.getWidth();
+        gameWidth = width;
+        gameHeight = width * ratio;
+        dynamicCamera.setToOrtho(false, gameWidth, gameHeight);
+        staticCamera.setToOrtho(false, gameWidth, gameHeight);
+    }
+
+    public void setCameraHeight(float height) {
+        float ratio = (float) Gdx.graphics.getWidth() / Gdx.graphics.getHeight();
+        gameHeight = height;
+        gameWidth = height * ratio;
+        dynamicCamera.setToOrtho(false, gameWidth, gameHeight);
+        staticCamera.setToOrtho(false, gameWidth, gameHeight);
+    }
+
+    public static float gameWidth() {
+        return gameWidth;
+    }
+
+    public static float gameHeight() {
+        return gameHeight;
     }
 
     // Structure

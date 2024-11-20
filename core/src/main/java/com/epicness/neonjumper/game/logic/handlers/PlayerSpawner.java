@@ -1,8 +1,8 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
+import static com.epicness.fundamentals.SharedScreen.gameHeight;
+import static com.epicness.fundamentals.SharedScreen.gameWidth;
 import static com.epicness.neonjumper.game.constants.GameConstants.PLAYER_GLOW_SIZE;
-import static com.epicness.neonjumper.game.logic.handlers.CameraHandler.gameHeight;
-import static com.epicness.neonjumper.game.logic.handlers.CameraHandler.gameWidth;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.epicness.neonjumper.game.logic.GameLogicHandler;

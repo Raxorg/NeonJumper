@@ -8,16 +8,11 @@ public class CameraHandler extends GameLogicHandler {
 
     private Player player;
     private Camera camera;
-    private static float gameWidth, gameHeight;
 
     @Override
     protected void init() {
         player = stuff.getPlayer();
-
         camera = screen.getDynamicCamera();
-
-        gameWidth = camera.viewportWidth;
-        gameHeight = camera.viewportHeight;
     }
 
     public void followPlayer() {
@@ -25,13 +20,5 @@ public class CameraHandler extends GameLogicHandler {
         if (diff < 0f) {
             camera.position.y -= diff;
         }
-    }
-
-    public static float gameWidth() {
-        return gameWidth;
-    }
-
-    public static float gameHeight() {
-        return gameHeight;
     }
 }

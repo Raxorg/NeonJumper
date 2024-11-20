@@ -18,6 +18,8 @@ public class GameRenderer extends Renderer<GameStuff> {
         spriteBatch.begin();
         stuff.getPlayer().draw(shapeDrawer, spriteBatch);
         loopArray(stuff.getObstacles(), obstacle -> obstacle.draw(shapeDrawer));
+        useStaticCamera();
+        stuff.getScoreText().draw(spriteBatch);
         spriteBatch.end();
 
         if (debug) {
@@ -26,6 +28,7 @@ public class GameRenderer extends Renderer<GameStuff> {
     }
 
     private void renderDebug() {
+        useDynamicCamera();
         spriteBatch.begin();
         stuff.getPlayer().drawDebug(shapeDrawer);
         spriteBatch.end();
