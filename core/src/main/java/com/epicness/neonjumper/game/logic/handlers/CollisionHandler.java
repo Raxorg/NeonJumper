@@ -24,6 +24,7 @@ public class CollisionHandler extends GameLogicHandler {
             if (CollisionUtils.overlapPolygonCircle(piece.getBounds(), playerBounds)) {
                 obstacles.removeValue(obstacle, true);
                 sharedAssets.getShortLaser().play();
+                get(ScoreHandler.class).penalize();
             }
         }));
     }

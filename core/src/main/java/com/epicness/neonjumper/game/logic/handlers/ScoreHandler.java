@@ -14,20 +14,25 @@ public class ScoreHandler extends GameLogicHandler {
 
     private Text scoreText;
     private Color initialColor, auxColor;
-    private float progress;
+    private float progress, lastY;
+    private int score;
+    private boolean penalizing;
 
     @Override
     protected void init() {
         scoreText = stuff.getScoreText();
         scoreText.setText("0");
-        scoreText.setColor(WHITE_50);
         scoreText.setScale(5f);
-        scoreText.setX(gameWidth() / 2f - scoreText.getPlainWidth() / 2f);
         scoreText.setY(gameHeight() - 20f);
+        scoreText.setWidth(gameWidth());
+        scoreText.hAlignCenter();
 
         initialColor = new Color();
         auxColor = new Color();
         progress = 0f;
+        lastY = 0f;
+        score = 0;
+        penalizing = false;
     }
 
     @Override
@@ -36,19 +41,27 @@ public class ScoreHandler extends GameLogicHandler {
 
         progress = Math.min(progress + delta, 1f);
         scoreText.setColor(auxColor.set(initialColor).lerp(WHITE_50, progress));
+
+        if (progress == 1f) penalizing = false;
     }
 
-    public void addScore(int score) {
-        initialColor.set(GRASS);
-        progress = 0f;
-        int currentScore = Integer.parseInt(scoreText.getText());
-        scoreText.setText(String.valueOf(currentScore + score));
+    public void updateScore(float playerY) {
+        if (lastY < playerY) {
+            if (!penalizing) {
+                initialColor.set(GRASS);
+                progress = 0f;
+            }
+            score += playerY - lastY;
+            scoreText.setText(String.valueOf(score));
+            lastY = playerY;
+        }
     }
 
-    public void removeScore(int score) {
+    public void penalize() {
         initialColor.set(SCARLET);
         progress = 0f;
-        int currentScore = Integer.parseInt(scoreText.getText());
-        scoreText.setText(String.valueOf(currentScore - score));
+        score -= Math.min(1000, score);
+        penalizing = true;
+        scoreText.setText(String.valueOf(score));
     }
 }

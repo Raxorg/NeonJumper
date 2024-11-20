@@ -37,7 +37,6 @@ public class GameLogic extends Logic {
         registerHandler(obstacleMover = new ObstacleMover());
         registerHandler(new PlayerSpawner());
         registerHandler(new Rotator());
-        registerHandler(new ScoreHandler());
         registerHandler(scoreHandler = new ScoreHandler());
         registerHandler(new VelocityMovementHandler());
 

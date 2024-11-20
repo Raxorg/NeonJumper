@@ -14,6 +14,7 @@ public class JumpHandler extends GameLogicHandler {
 
     @Override
     public void touchDown(float x, float y, int button) {
+        get(GravityHandler.class).enable();
         player.speed.y = 700f;
     }
 }

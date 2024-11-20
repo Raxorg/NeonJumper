@@ -17,5 +17,6 @@ public class VelocityMovementHandler extends GameLogicHandler {
 
     public void movePlayer(float delta) {
         player.translate(aux.set(player.speed).scl(delta));
+        get(ScoreHandler.class).updateScore(player.getY());
     }
 }
