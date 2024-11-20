@@ -23,7 +23,9 @@ public class ObstacleGenerator extends GameLogicHandler {
         CircleDoorBuilder circleDoorBuilder = new CircleDoorBuilder(3, 50f, 130f);
         TriangleBuilder triangleBuilder = new TriangleBuilder(100f);
         for (int i = 0; i < 5; i++) {
-            Obstacle obstacle = MathUtils.randomBoolean() ? new Obstacle(circleDoorBuilder) : new Obstacle(triangleBuilder);
+            boolean random = MathUtils.randomBoolean();
+            Obstacle obstacle = random ? new Obstacle(triangleBuilder) : new Obstacle(circleDoorBuilder);
+            if (random) get(HorizontalMover.class).registerObstacle(obstacle);
             obstacle.setPosition(gameWidth() / 2f, 500f + i * 400f);
             get(Rotator.class).registerObstacle(obstacle);
             obstacles.add(obstacle);

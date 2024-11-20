@@ -25,6 +25,7 @@ public class ObstacleCleaner extends GameLogicHandler {
             if (obstacle.getY() + obstacle.getHeight() < bottomY) {
                 obstacles.removeValue(obstacle, true);
                 get(Rotator.class).unregisterObstacle(obstacle);
+                get(HorizontalMover.class).unregisterObstacle(obstacle);
             }
         });
     }
