@@ -17,7 +17,9 @@ public class ObstacleGenerator extends GameLogicHandler {
     @Override
     protected void init() {
         obstacles = stuff.getObstacles();
+    }
 
+    public void spawnObstacles() {
         CircleDoorBuilder circleDoorBuilder = new CircleDoorBuilder(3, 60f, 100f);
         TriangleBuilder triangleBuilder = new TriangleBuilder(100f);
         for (int i = 0; i < 5; i++) {
@@ -25,6 +27,8 @@ public class ObstacleGenerator extends GameLogicHandler {
             obstacle.setPosition(gameWidth() / 2f, 500f + i * 400f);
             obstacles.add(obstacle);
         }
+        get(Rotator.class).registerObstacle(obstacles.get(2));
+        get(Rotator.class).registerObstacle(obstacles.get(1));
     }
 
     @Override

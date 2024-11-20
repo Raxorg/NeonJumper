@@ -1,6 +1,5 @@
 package com.epicness.neonjumper.game.logic.handlers;
 
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.epicness.fundamentals.utils.ArrayUtils.loopArray;
 
 import com.badlogic.gdx.utils.SnapshotArray;
@@ -23,7 +22,8 @@ public class CollisionHandler extends GameLogicHandler {
     public void checkCollisions() {
         loopArray(obstacles, obstacle -> loopArray(obstacle.getPieces(), piece -> {
             if (CollisionUtils.overlapPolygonCircle(piece.getBounds(), playerBounds)) {
-                piece.setBorderColor(RED);
+                obstacles.removeValue(obstacle, true);
+                sharedAssets.getShortLaser().play();
             }
         }));
     }

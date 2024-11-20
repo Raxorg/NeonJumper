@@ -22,7 +22,10 @@ public class ObstacleCleaner extends GameLogicHandler {
     public void cleanObstacles() {
         float bottomY = camera.position.y - gameHeight() / 2f;
         loopArray(obstacles, obstacle -> {
-            if (obstacle.getY() + obstacle.getHeight() < bottomY) obstacles.removeValue(obstacle, true);
+            if (obstacle.getY() + obstacle.getHeight() < bottomY) {
+                obstacles.removeValue(obstacle, true);
+                get(Rotator.class).unregisterObstacle(obstacle);
+            }
         });
     }
 }

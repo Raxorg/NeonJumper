@@ -14,6 +14,7 @@ public class GameLoopHandler extends GameLogicHandler {
         get(VelocityMovementHandler.class).movePlayer(delta);
         get(BottomChecker.class).checkBottom();
         get(CameraHandler.class).followPlayer();
+        get(Rotator.class).rotateObstacles(delta);
         get(CollisionHandler.class).checkCollisions();
         get(ObstacleCleaner.class).cleanObstacles();
     }

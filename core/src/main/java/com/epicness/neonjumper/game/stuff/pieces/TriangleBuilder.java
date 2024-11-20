@@ -2,20 +2,20 @@ package com.epicness.neonjumper.game.stuff.pieces;
 
 public class TriangleBuilder extends PieceBuilder {
 
-    private final float halfSize;
-    private final float height;
+    private final float halfSize, height, yShift;
 
     public TriangleBuilder(float size) {
         halfSize = size / 2f;
         height = (float) (Math.sqrt(3f) / 2f * size);
+        yShift = -height / 3f;
     }
 
     @Override
     float[] makeVertices() {
         return new float[]{
-            -halfSize, 0f,
-            halfSize, 0f,
-            0f, height
+            -halfSize, yShift,
+            halfSize, yShift,
+            0f, height + yShift
         };
     }
 }
