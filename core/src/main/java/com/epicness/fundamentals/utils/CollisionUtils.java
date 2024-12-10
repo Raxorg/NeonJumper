@@ -39,35 +39,21 @@ public class CollisionUtils {
         return intersects(line.getRay(), wireframeCube, intersection);
     }
 
-    /* Also returns true if the polygon contains the circle */
     public static boolean overlapPolygonCircle(Polygon polygon, Circle circle) {
-        float[] vertices = polygon.getTransformedVertices();
-        Vector2 start = new Vector2();
-        Vector2 end = new Vector2();
-        Vector2 center = new Vector2(circle.x, circle.y);
-        float squareRadius = circle.radius * circle.radius;
-        /* Loop through the segments of the polygon */
-        for (int i = 0; i < vertices.length; i += 2) {
-            if (i == 0) {
-                start.set(vertices[vertices.length - 2], vertices[vertices.length - 1]);
-            } else {
-                start.set(vertices[i - 2], vertices[i - 1]);
-            }
-            end.set(vertices[i], vertices[i + 1]);
-            if (Intersector.intersectSegmentCircle(start, end, center, squareRadius)) {
-                return true;
-            }
-        }
-        return polygon.contains(circle.x, circle.y);
+        return overlapPolygonCircle(polygon, circle.x, circle.y, circle.radius);
+    }
+
+    public static boolean overlapPolygonCircle(Polygon polygon, CirclePlus circle) {
+        return overlapPolygonCircle(polygon, circle.getCenterX(), circle.getCenterY(), circle.getRadius());
     }
 
     /* Also returns true if the polygon contains the circle */
-    public static boolean overlapPolygonCircle(Polygon polygon, CirclePlus circle) {
+    private static boolean overlapPolygonCircle(Polygon polygon, float circleCenterX, float circleCenterY, float circleRadius) {
         float[] vertices = polygon.getTransformedVertices();
         Vector2 start = new Vector2();
         Vector2 end = new Vector2();
-        Vector2 center = circle.getCenter();
-        float squareRadius = circle.getRadius() * circle.getRadius();
+        Vector2 center = new Vector2(circleCenterX, circleCenterY);
+        float squareRadius = circleRadius * circleRadius;
         /* Loop through the segments of the polygon */
         for (int i = 0; i < vertices.length; i += 2) {
             if (i == 0) {
@@ -80,6 +66,6 @@ public class CollisionUtils {
                 return true;
             }
         }
-        return polygon.contains(circle.getX(), circle.getY());
+        return polygon.contains(center);
     }
 }
